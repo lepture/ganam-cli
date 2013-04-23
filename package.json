@@ -1,0 +1,24 @@
+{
+  "name": "ganam-cli",
+  "version": "0.1.0",
+  "description": "Ganam style command line tools",
+  "author": "Hsiaoming Yang <me@lepture.com>",
+  "keywords": [
+    "style",
+    "kss",
+    "css",
+    "parser",
+    "ganam",
+    "styleguide"
+  ],
+  "dependencies": {
+    "ganam": "~0.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lepture/ganam-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lepture/ganam-cli/issues"
+  }
+}
