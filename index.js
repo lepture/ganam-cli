@@ -104,7 +104,11 @@ function findTheme(name) {
   if (fs.existsSync(path.join(dir, name))) {
     return path.join(dir, name);
   }
-  return path.resolve(name);
+  var filepath = path.resolve(name);
+  if (!fs.existsSync(filepath)) {
+    throw new Error('theme not found: ' + name);
+  }
+  return filepath;
 }
 
 
@@ -113,7 +117,7 @@ function compileFile(theme) {
   var template = path.resolve(dir, 'template.html');
 
   if (!fs.existsSync(template)) {
-    throw new Error('template not found.');
+    throw new Error('template not found: ' + template);
   }
 
   return swig.compileFile(template);

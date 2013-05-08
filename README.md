@@ -15,14 +15,17 @@ $ ganam -h
 
   Options:
 
-    -C, --config <path>    Speicify a config file
-    -u, --use <path>       Utilize the stylus plugin at <path>
-    -U, --inline           Utilize image inlining via data uri support
     -o, --out <dir>        Output to <dir> when passing files
+    -t, --theme <name>     Specify the theme, default is github
+    -u, --use <path>       Utilize the stylus plugin at <path>
     -I, --include <path>   Add <path> to lookup paths
     -c, --compress         Compress css output
     --import <file>        Import stylus <file>
     --include-css          Include regular css on @import
+    -q, --quiet            Only show warn logs
+    -v, --verbose          Show more logs
+    -V, --version          Display the version
+    -h, --help             Display this help menu
 ```
 
 The style file structure:
