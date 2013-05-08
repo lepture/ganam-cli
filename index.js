@@ -85,7 +85,17 @@ module.exports = function(options) {
       log.debug('ignore - ' + filename);
       return;
     }
-    var guide = ganam.styleSync(filepath, options);
+    var guide;
+    if (options.verbose) {
+      guide = ganam.styleSync(filepath, options);
+    } else {
+      try {
+        guide = ganam.styleSync(filepath, options);
+      } catch (e) {
+        log.warn(e.message);
+        guide = null;
+      }
+    }
     if (guide && guide.sections.length) {
       guide.filename = filename;
       guide.name = filename.replace(/\.(\w+)$/, '');
