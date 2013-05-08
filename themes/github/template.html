@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Style Guide</title>
+    <style type="text/css">
+      {{ guide.css }}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="menu-container">
+        <ol class="menu">
+          {%- for item in styleguides %}
+          {%- if item.name == guide.name %}
+          <li class="active"><a href="{{content_url(item.destination)}}">{{item.name|title}}</a></li>
+          {%- else %}
+          <li><a href="{{content_url(item.destination)}}">{{item.name|title}}</a></li>
+          {%- endif %}
+          {%- endfor %}
+        </ol>
+      </div>
+      <div class="styleguide">
+        {%- for section in guide.sections %}
+        <div class="section">
+          <h3 class="section-title">
+            <span class="section-name">{{section.name}}</span>
+            <span class="section-title">{{section.title}}</span>
+          </h3>
+          <div class="section-body">
+            {{section.description|markdown}}
+            <ul class="modifier">
+              {%- for modifier in section.modifiers %}
+              <li><strong>{{modifier.name}}</strong> - {{modifier.description}}</li>
+              {%- endfor %}
+            </ul>
+          </div>
+          {%- for example in section.examples %}
+          <div class="example">
+            {%- if example.name %}
+            <span class="example-name">{{example.name}}</span>
+            {%- endif %}
+            {{example.code}}
+          </div>
+          {%- endfor %}
+          <div class="section-html">
+            {{section.html|highlight('html')}}
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </body>
+</html>
