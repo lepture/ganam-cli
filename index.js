@@ -99,8 +99,12 @@ module.exports = function(options) {
     var dest = path.join(out, guide.name + '.html');
     var data = {guide: guide, styleguides: guides}
     data.permalink = function(item) {
-      var url = path.relative(path.dirname(guide.name), item.name);
-      return url = unixifyPath(url) + '.html';
+      var dir = path.dirname(guide.name);
+      var url = unixifyPath(path.relative(dir, item.name || item));
+      if (item.name) {
+        url += '.html';
+      }
+      return url;
     };
     write(dest, tpl.render(data));
   });
