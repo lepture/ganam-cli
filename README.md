@@ -53,6 +53,8 @@ Find the syntax at: [Ganam Parser](https://github.com/lepture/ganam#syntax)
 **May 8, 2013** `0.2.0`
 
 - Support recurse walk directory. [#1](https://github.com/lepture/ganam-cli/issues/1)
+- Bugfix, missing option `-c, --compress`. [#3](https://github.com/lepture/ganam-cli/issues/3)
+- Show ganam version: `ganam --version`.
 
 **May 8, 2013** `0.1.0`
 
