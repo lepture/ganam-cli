@@ -14,9 +14,9 @@
         <ol class="menu">
           {%- for item in styleguides %}
           {%- if item.name == guide.name %}
-          <li class="active"><a href="{{item.name}}.html">{{item.name|title}}</a></li>
+          <li class="active"><a href="{{permalink(item)}}">{{item.name|title}}</a></li>
           {%- else %}
-          <li><a href="{{item.name}}.html">{{item.name|title}}</a></li>
+          <li><a href="{{permalink(item)}}">{{item.name|title}}</a></li>
           {%- endif %}
           {%- endfor %}
         </ol>

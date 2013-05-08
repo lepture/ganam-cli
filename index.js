@@ -91,8 +91,12 @@ module.exports = function(options) {
 
   guides.forEach(function(guide) {
     var dest = path.join(out, guide.name + '.html');
-    var data = tpl.render({guide: guide, styleguides: guides});
-    write(dest, data);
+    var data = {guide: guide, styleguides: guides}
+    data.permalink = function(item) {
+      var url = path.relative(path.dirname(guide.name), item.name);
+      return url = unixifyPath(url) + '.html';
+    };
+    write(dest, tpl.render(data));
   });
 
   copy(theme, out);
