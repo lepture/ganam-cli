@@ -47,7 +47,7 @@ var log = {
 
   debug: function(msg) {
     if (this.level !== 'debug') return;
-    process.stdout.write('  debug : ' + msg);
+    console.log(' \x1b[34mdebug\x1b[0m : ' + msg);
   }
 }
 
@@ -70,19 +70,25 @@ module.exports = function(options) {
   var tpl = compileFile(theme);
 
   var guides = [];
-  fs.readdirSync(src).forEach(function(file) {
-    var abspath = path.join(src, file);
-    if (!fs.statSync(abspath).isFile()) {
+  recurse(src, function(filepath, rootdir, subdir) {
+    // if the filename startswith _, ignore it.
+    var filename = unixifyPath(path.relative(src, filepath));
+    if (filename.charAt(0) === '_') {
+      log.debug('ignore - ' + filename);
       return;
     }
-    var guide = ganam.styleSync(abspath, options);
+    if (subdir && subdir.charAt(0) === '_') {
+      log.debug('ignore - ' + filename);
+      return;
+    }
+    var guide = ganam.styleSync(filepath, options);
     if (guide && guide.sections.length) {
-      guide.filename = file;
-      guide.name = file.replace(/\.(\w+)$/, '');
+      guide.filename = filename;
+      guide.name = filename.replace(/\.(\w+)$/, '');
       guides.push(guide);
-      log.info('valid guide - ' + file);
+      log.info('valid guide - ' + filename);
     } else {
-      log.warn('invalid guide - ' + file);
+      log.warn('invalid guide - ' + filename);
     }
   });
   guides.sort(function(a, b) {
