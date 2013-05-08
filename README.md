@@ -46,3 +46,14 @@ guide/
 ## Style Syntax
 
 Find the syntax at: [Ganam Parser](https://github.com/lepture/ganam#syntax)
+
+
+## Changelog
+
+**May 8, 2013** `0.2.0`
+
+- Support recurse walk directory. [#1](https://github.com/lepture/ganam-cli/issues/1)
+
+**May 8, 2013** `0.1.0`
+
+First preview release.
