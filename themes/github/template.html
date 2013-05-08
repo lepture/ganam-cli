@@ -14,9 +14,9 @@
         <ol class="menu">
           {%- for item in styleguides %}
           {%- if item.name == guide.name %}
-          <li class="active"><a href="{{content_url(item.destination)}}">{{item.name|title}}</a></li>
+          <li class="active"><a href="{{item.name}}.html">{{item.name|title}}</a></li>
           {%- else %}
-          <li><a href="{{content_url(item.destination)}}">{{item.name|title}}</a></li>
+          <li><a href="{{item.name}}.html">{{item.name|title}}</a></li>
           {%- endif %}
           {%- endfor %}
         </ol>
@@ -29,7 +29,7 @@
             <span class="section-title">{{section.title}}</span>
           </h3>
           <div class="section-body">
-            {{section.description}}
+            {{section.description|markdown}}
             <ul class="modifier">
               {%- for modifier in section.modifiers %}
               <li><strong>{{modifier.name}}</strong> - {{modifier.description}}</li>
@@ -45,7 +45,7 @@
           </div>
           {%- endfor %}
           <div class="section-html">
-            {{section.html}}
+            <pre><code>{{section.html|highlight('html')}}</code></pre>
           </div>
         </div>
         {%- endfor %}

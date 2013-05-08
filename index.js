@@ -2,11 +2,35 @@ var fs = require('fs');
 var path = require('path');
 var ganam = require('ganam');
 var swig = require('swig');
+var format = require('util').format;
 
 swig.init({
   autoescape: false,
   cache: false,
-  allowErrors: true
+  allowErrors: true,
+  filters: {
+    markdown: require('marked'),
+    highlight: function(code, lang) {
+      if (!lang) {
+        code = code
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+        return '<pre>' + code + '</pre>';
+      }
+
+      if (lang === 'html') {
+        lang = 'xml';
+      }
+
+      code = require('highlight.js').highlight(lang, code).value;
+      return format(
+        '<pre class="highlight"><code class="%s">%s</code></pre>',
+        lang, code
+      );
+    }
+  }
 });
 
 var log = {

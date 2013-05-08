@@ -13,6 +13,8 @@
   ],
   "dependencies": {
     "swig": "*",
+    "marked": "*",
+    "highlight.js": "*",
     "ganam": "~0.1.2"
   },
   "repository": {
