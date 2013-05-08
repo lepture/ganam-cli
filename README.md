@@ -2,7 +2,14 @@
 
 > The command line tools for ganam.
 
-**ON DEVELOPMENT**
+
+## Install
+
+Install with npm:
+
+    $ npm install ganam-cli -g
+
+Remember the `-g` option.
 
 ## Usage
 
