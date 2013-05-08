@@ -52,7 +52,7 @@ function main(argv) {
         break;
       case '-o':
       case '--out':
-        options.out = args.shift();
+        options.out = argv.shift();
         break;
 
       case '--include-css':
@@ -60,12 +60,12 @@ function main(argv) {
         break;
       case '-I':
       case '--include':
-        var _p = args.shift();
+        var _p = argv.shift();
         if (!_p) throw new Error('--include <path> required');
         options.paths.push(_p);
         break;
       case '--import':
-        var file = args.shift();
+        var file = argv.shift();
         if (!file) throw new Error('--import <file> required');
         options.imports.push(file);
         break;

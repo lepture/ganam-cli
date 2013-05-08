@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Style Guide</title>
+    <link rel="stylesheet" href="./style.css" />
     <style type="text/css">
       {{ guide.css }}
     </style>
@@ -28,7 +29,7 @@
             <span class="section-title">{{section.title}}</span>
           </h3>
           <div class="section-body">
-            {{section.description|markdown}}
+            {{section.description}}
             <ul class="modifier">
               {%- for modifier in section.modifiers %}
               <li><strong>{{modifier.name}}</strong> - {{modifier.description}}</li>
@@ -44,7 +45,7 @@
           </div>
           {%- endfor %}
           <div class="section-html">
-            {{section.html|highlight('html')}}
+            {{section.html}}
           </div>
         </div>
         {%- endfor %}

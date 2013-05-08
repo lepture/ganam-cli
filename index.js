@@ -13,12 +13,12 @@ var log = {
   level: 'info',
 
   warn: function(msg) {
-    process.stdout.write('  \x1b[33mwarn\x1b[0m : ' + msg);
+    console.log('  \x1b[33mwarn\x1b[0m : ' + msg);
   },
 
   info: function(msg) {
     if (this.level === 'warn') return;
-    process.stdout.write('  \x1b[32mwarn\x1b[0m : ' + msg);
+    console.log('  \x1b[32minfo\x1b[0m : ' + msg);
   },
 
   debug: function(msg) {
@@ -37,22 +37,24 @@ module.exports = function(options) {
     log.level = 'warn';
   }
 
-  var out = options.out || 'out';
   var src = options.src || 'guide';
+  options.paths = options.paths || [];
+  options.paths.push(path.resolve(src));
+
+  var out = options.out || 'out';
   var theme = options.theme || 'github';
   var tpl = compileFile(theme);
 
   var guides = [];
   fs.readdirSync(src).forEach(function(file) {
-    if (!fs.statSync(file).isFile()) {
+    var abspath = path.join(src, file);
+    if (!fs.statSync(abspath).isFile()) {
       return;
     }
-    var guide = ganam.styleSync(
-      path.join(src, file), options
-    );
+    var guide = ganam.styleSync(abspath, options);
     if (guide && guide.sections.length) {
       guide.filename = file;
-      guide.name = file.replace(/\.(\w+)$/, '.html');
+      guide.name = file.replace(/\.(\w+)$/, '');
       guides.push(guide);
       log.info('valid guide - ' + file);
     } else {
@@ -84,7 +86,6 @@ function findTheme(name) {
 
 function compileFile(theme) {
   var dir = findTheme(theme);
-  console.log(dir)
   var template = path.resolve(dir, 'template.html');
 
   if (!fs.existsSync(template)) {
