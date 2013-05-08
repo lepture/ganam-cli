@@ -23,5 +23,9 @@
   },
   "bugs": {
     "url": "https://github.com/lepture/ganam-cli/issues"
-  }
+  },
+  "bin": {
+    "ganam": "bin/ganam"
+  },
+  "preferGlobal": "true"
 }
