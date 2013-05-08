@@ -120,8 +120,15 @@ function helpMessage() {
 function versionMessage() {
   var pkg = require('../package.json');
   var format = require('util').format;
+  var ganamDir = path.dirname(require.resolve('ganam'));
+  var ganam = require(path.join(ganamDir, 'package.json'));
   console.log()
-  console.log(format('  %s %s (%s)', pkg.name, pkg.version, process.platform));
+  console.log(format(
+    ' ganam %s, %s %s (%s)',
+    ganam.version,
+    pkg.name, pkg.version,
+    process.platform
+  ));
   console.log()
   process.exit();
 }
