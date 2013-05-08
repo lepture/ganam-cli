@@ -12,6 +12,7 @@
     "styleguide"
   ],
   "dependencies": {
+    "swig": "*",
     "ganam": "~0.1.2"
   },
   "repository": {

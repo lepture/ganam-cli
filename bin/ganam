@@ -1,0 +1,118 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+
+main(process.argv.slice(2));
+
+function main(argv) {
+  var options = {
+
+    // stylus options
+    includeCSS: false,
+    paths: [],
+    compress: false,
+    plugins: [],
+    imports: [],
+
+    quiet: false,
+    verbose: false,
+  };
+
+  var getArg = function() {
+    var args = argv.shift();
+    args = args.split('=');
+    if (args.length > 1) {
+      argv.unshit(args.slice(1).join('='));
+    }
+    return args[0];
+  };
+
+  var arg, remains = [];
+
+  while (argv.length) {
+    arg = getArg();
+    switch(arg) {
+      case '-h':
+      case '--help':
+        helpMessage();
+        break;
+      case '-V':
+      case '--version':
+        versionMessage();
+        break;
+
+      case '-q':
+      case '--quiet':
+        options.quiet = true;
+        break;
+      case '-v':
+      case '--verbose':
+        options.verbose = true;
+        break;
+      case '-o':
+      case '--out':
+        options.out = args.shift();
+        break;
+
+      case '--include-css':
+        options.includeCSS = true;
+        break;
+      case '-I':
+      case '--include':
+        var _p = args.shift();
+        if (!_p) throw new Error('--include <path> required');
+        options.paths.push(_p);
+        break;
+      case '--import':
+        var file = args.shift();
+        if (!file) throw new Error('--import <file> required');
+        options.imports.push(file);
+        break;
+
+      default:
+        remains.push(arg);
+        break;
+    }
+  }
+
+  if (!remains.length) {
+    console.log('You need to specify a directory');
+    process.exit(1);
+  }
+
+  options.src = remains[0];
+  require('../')(options);
+}
+
+function helpMessage() {
+  console.log();
+  var lines = [
+    '  Usage: ganam [options] <dir>',
+    '',
+    '  Options:',
+    '',
+    '    -o, --out <dir>        Output to <dir> when passing files',
+    '    -u, --use <path>       Utilize the stylus plugin at <path>',
+    '    -I, --include <path>   Add <path> to lookup paths',
+    '    -c, --compress         Compress css output',
+    '    --import <file>        Import stylus <file>',
+    '    --include-css          Include regular css on @import',
+    '    -q, --quiet            Only show warn logs',
+    '    -v, --verbose          Show more logs',
+    '    -V, --version          Display the version',
+    '    -h, --help             Display this help menu',
+    ''
+  ];
+  console.log(lines.join('\n'));
+  process.exit();
+}
+
+function versionMessage() {
+  var pkg = require('../package.json');
+  var format = require('util').format;
+  console.log()
+  console.log(format('  %s %s (%s)', pkg.name, pkg.version, process.platform));
+  console.log()
+  process.exit();
+}
