@@ -81,6 +81,10 @@ module.exports = function(options) {
       log.debug('ignore - ' + filename);
       return;
     }
+    if (path.basename(filename).charAt(0) === '_') {
+      log.debug('ignore - ' + filename);
+      return;
+    }
     var guide = ganam.styleSync(filepath, options);
     if (guide && guide.sections.length) {
       guide.filename = filename;
