@@ -94,25 +94,15 @@ exports = module.exports = function(options) {
   }
   if (readme) {
     log.info('readme - ' + readme);
-    write(path.join(out, 'index.html'), tpl({
+    tpl(out, 'index.html', {
       readme: fs.readFileSync(readme, 'utf8'),
       styleguides: guides
-    }));
+    });
   }
 
   // render style guides
   guides.forEach(function(guide) {
-    var dest = path.join(out, guide.name + '.html');
-    var data = {guide: guide, styleguides: guides}
-    data.permalink = function(item) {
-      var dir = path.dirname(guide.name);
-      var url = unixifyPath(path.relative(dir, item.name || item));
-      if (item.name) {
-        url += '.html';
-      }
-      return url;
-    };
-    write(dest, tpl(data));
+    tpl(out, guide.name + '.html', {guide: guide, styleguides: guides});
   });
 };
 exports.log = log;
@@ -206,10 +196,19 @@ function compileTheme(theme) {
   });
 
   var tpl = swig.compileFile(template);
-  return function(data) {
+
+  return function(out, dest, data) {
     data.theme = themeConfig;
     data.pkg = pkg;
-    return tpl.render(data);
+    data.permalink = function(item) {
+      var dir = path.dirname(dest);
+      var url = unixifyPath(path.relative(dir, item.name || item));
+      if (item.name) {
+        url += '.html';
+      }
+      return url;
+    };
+    write(path.join(out, dest), tpl.render(data));
   }
 }
 exports.compileTheme = compileTheme;
