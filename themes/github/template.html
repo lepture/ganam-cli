@@ -21,6 +21,11 @@
           {%- endfor %}
         </ol>
       </div>
+      {%- if readme %}
+      <div class="readme">
+        {{ readme|markdown }}
+      </div>
+      {%- else %}
       <div class="styleguide">
         {%- for section in guide.sections %}
         <div class="section">
@@ -50,6 +55,7 @@
         </div>
         {%- endfor %}
       </div>
+      {%- endif %}
     </div>
   </body>
 </html>

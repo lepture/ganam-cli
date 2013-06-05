@@ -55,6 +55,11 @@
   float: right;
   width: 700px;
 }
+.readme {
+  float: right;
+  width: 680px;
+  margin-left: 20px;
+}
 .section {
   border: 1px solid #ddd;
   border-top-color: #333;
