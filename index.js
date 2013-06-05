@@ -49,9 +49,9 @@ var log = {
     if (this.level !== 'debug') return;
     console.log(' \x1b[34mdebug\x1b[0m : ' + msg);
   }
-}
+};
 
-module.exports = function(options) {
+exports = module.exports = function(options) {
   options = options || {};
 
   if (options.verbose) {
@@ -72,7 +72,7 @@ module.exports = function(options) {
 
   var out = options.out || 'out';
   var theme = options.theme || 'github';
-  var tpl = compileFile(theme);
+  var tpl = compileTheme(theme);
 
   var guides = [];
   recurse(src, function(filepath, rootdir, subdir) {
@@ -105,9 +105,9 @@ module.exports = function(options) {
       guide.filename = filename;
       guide.name = filename.replace(/\.(\w+)$/, '');
       guides.push(guide);
-      log.info('valid guide - ' + filename);
+      log.info('guide - ' + filename);
     } else {
-      log.warn('invalid guide - ' + filename);
+      log.warn('invalid - ' + filename);
     }
   });
   guides.sort(function(a, b) {
@@ -130,7 +130,7 @@ module.exports = function(options) {
 
   copy(theme, out);
 };
-
+exports.log = log;
 
 function findTheme(name) {
   var dir = path.resolve(__dirname, 'themes');
@@ -143,9 +143,10 @@ function findTheme(name) {
   }
   return filepath;
 }
+exports.findTheme = findTheme;
 
 
-function compileFile(theme) {
+function compileTheme(theme) {
   var dir = findTheme(theme);
   var template = path.resolve(dir, 'template.html');
 
@@ -155,6 +156,7 @@ function compileFile(theme) {
 
   return swig.compileFile(template);
 }
+exports.compileTheme = compileTheme;
 
 
 function copy(theme, dest) {
@@ -179,6 +181,7 @@ function write(filepath, content) {
   mkdir(path.dirname(filepath));
   fs.writeFileSync(filepath, content);
 }
+exports.write = write;
 
 
 function recurse(rootdir, callback, subdir) {
@@ -192,6 +195,7 @@ function recurse(rootdir, callback, subdir) {
     }
   });
 }
+exports.recurse = recurse;
 
 
 function mkdir(dirpath, mode) {
@@ -208,6 +212,7 @@ function mkdir(dirpath, mode) {
     return parts;
   }, '');
 }
+exports.mkdir = mkdir;
 
 
 function unixifyPath(filepath) {

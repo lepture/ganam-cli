@@ -15,6 +15,7 @@ function main(argv) {
     plugins: [],
     imports: [],
 
+    watch: false,
     quiet: false,
     verbose: false,
   };
@@ -77,6 +78,10 @@ function main(argv) {
         if (!file) throw new Error('--import <file> required');
         options.imports.push(file);
         break;
+      case '-w':
+      case '--watch':
+        options.watch = true;
+        break;
 
       default:
         remains.push(arg);
@@ -90,7 +95,20 @@ function main(argv) {
   }
 
   options.src = remains[0];
-  require('../')(options);
+  var ganam = require('../');
+  ganam(options);
+
+  if (options.watch) {
+    var fs = require('fs');
+    var path = require('path');
+    ganam.log.info('watch - ' + options.src);
+    ganam.recurse(options.src, function(filepath) {
+      watch(filepath, function(filepath) {
+        ganam.log.debug('change - ' + filepath);
+        ganam(options);
+      });
+    });
+  }
 }
 
 function helpMessage() {
@@ -131,4 +149,22 @@ function versionMessage() {
   ));
   console.log()
   process.exit();
+}
+
+function watch(file, fn) {
+  // if is windows use fs.watch api instead
+  // TODO: remove watchFile when fs.watch() works on osx etc
+  if (process.platform === 'win32') {
+    fs.watch(file, function(event) {
+      if (event === 'change') {
+        fn(file);
+      }
+    });
+  } else {
+    fs.watchFile(file, { interval: 300 }, function(curr, prev) {
+      if (curr.mtime > prev.mtime) {
+        fn(file);
+      }
+    });
+  }
 }
