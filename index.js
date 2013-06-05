@@ -85,6 +85,23 @@ exports = module.exports = function(options) {
     return a.order - b.order;
   });
 
+  // copy static files to out dir
+  copy(theme, out);
+
+  // generate index page
+  var readme = findIndex(options.src);
+  if (!readme) {
+    readme = findIndex('.');
+  }
+  if (readme) {
+    log.info('readme - ' + readme);
+    write(path.join(out, 'index.html'), tpl.render({
+      readme: fs.readFileSync(readme, 'utf8'),
+      styleguides: guides
+    }));
+  }
+
+  // render style guides
   guides.forEach(function(guide) {
     var dest = path.join(out, guide.name + '.html');
     var data = {guide: guide, styleguides: guides}
@@ -99,10 +116,17 @@ exports = module.exports = function(options) {
     data.theme = themeConfig;
     write(dest, tpl.render(data));
   });
-
-  copy(theme, out);
 };
 exports.log = log;
+
+function findIndex(src) {
+  var names = fs.readdirSync(src).filter(function(name) {
+    return /^readme\.md/i.test(name) || /^index\.md/i.test(name);
+  });
+  if (names.length) {
+    return path.join(src, names[0]);
+  }
+}
 
 function findTheme(name) {
   var dir = path.resolve(__dirname, 'themes');
