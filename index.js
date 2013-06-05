@@ -1,37 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var ganam = require('ganam');
-var swig = require('swig');
 var format = require('util').format;
-
-swig.init({
-  autoescape: false,
-  cache: false,
-  allowErrors: true,
-  filters: {
-    markdown: require('marked'),
-    highlight: function(code, lang) {
-      if (!lang) {
-        code = code
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-        return '<pre>' + code + '</pre>';
-      }
-
-      if (lang === 'html') {
-        lang = 'xml';
-      }
-
-      code = require('highlight.js').highlight(lang, code).value;
-      return format(
-        '<pre class="highlight"><code class="%s">%s</code></pre>',
-        lang, code
-      );
-    }
-  }
-});
 
 var log = {
   level: 'info',
@@ -50,6 +20,7 @@ var log = {
     console.log(' \x1b[34mdebug\x1b[0m : ' + msg);
   }
 };
+var themeConfig = {};
 
 exports = module.exports = function(options) {
   options = options || {};
@@ -125,6 +96,7 @@ exports = module.exports = function(options) {
       }
       return url;
     };
+    data.theme = themeConfig;
     write(dest, tpl.render(data));
   });
 
@@ -153,6 +125,48 @@ function compileTheme(theme) {
   if (!fs.existsSync(template)) {
     throw new Error('template not found: ' + template);
   }
+  var swig = require('swig');
+
+  var filters = {
+    markdown: require('marked'),
+    highlight: function(code, lang) {
+      if (!lang) {
+        code = code
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+        return '<pre>' + code + '</pre>';
+      }
+
+      if (lang === 'html') {
+        lang = 'xml';
+      }
+
+      code = require('highlight.js').highlight(lang, code).value;
+
+      return format(
+        '<pre class="highlight"><code class="%s">%s</code></pre>',
+        lang, code
+      );
+    }
+  }
+  var config = path.resolve(dir, 'theme.js');
+  if (fs.existsSync(config)) {
+    themeConfig = require(config);
+  }
+  if (themeConfig.filters) {
+    Object.keys(themeConfig.filters).forEach(function(key) {
+      filters[key] = themeConfig.filters[key];
+    });
+  }
+
+  swig.init({
+    autoescape: false,
+    cache: false,
+    allowErrors: true,
+    filters: filters
+  });
 
   return swig.compileFile(template);
 }
@@ -165,6 +179,9 @@ function copy(theme, dest) {
   recurse(dir, function(filepath) {
     var filename = path.relative(dir, filepath);
     if (filename === 'template.html') {
+      return false;
+    }
+    if (filename === 'theme.js') {
       return false;
     }
     var out = path.join(dest, filename);

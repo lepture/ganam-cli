@@ -1,2 +1,5 @@
 build:
-	@node bin/ganam -I node_modules/nib/lib example -v
+	@node bin/ganam example -v
+
+watch:
+	@node bin/ganam example -v -w
