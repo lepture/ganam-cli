@@ -65,6 +65,11 @@ module.exports = function(options) {
   options.paths = options.paths || [];
   options.paths.push(path.resolve(src));
 
+  var nm = path.resolve('node_modules');
+  if (fs.existsSync(nm)) {
+    options.paths.push(path.resolve(nm));
+  }
+
   var out = options.out || 'out';
   var theme = options.theme || 'github';
   var tpl = compileFile(theme);
