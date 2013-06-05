@@ -20,7 +20,6 @@ var log = {
     console.log(' \x1b[34mdebug\x1b[0m : ' + msg);
   }
 };
-var themeConfig = {};
 
 exports = module.exports = function(options) {
   options = options || {};
@@ -95,7 +94,7 @@ exports = module.exports = function(options) {
   }
   if (readme) {
     log.info('readme - ' + readme);
-    write(path.join(out, 'index.html'), tpl.render({
+    write(path.join(out, 'index.html'), tpl({
       readme: fs.readFileSync(readme, 'utf8'),
       styleguides: guides
     }));
@@ -113,8 +112,7 @@ exports = module.exports = function(options) {
       }
       return url;
     };
-    data.theme = themeConfig;
-    write(dest, tpl.render(data));
+    write(dest, tpl(data));
   });
 };
 exports.log = log;
@@ -151,6 +149,7 @@ function compileTheme(theme) {
   }
   var swig = require('swig');
 
+  // default filters for swig
   var filters = {
     markdown: require('marked'),
     highlight: function(code, lang) {
@@ -175,14 +174,28 @@ function compileTheme(theme) {
       );
     }
   }
+
+  // load theme config
   var config = path.resolve(dir, 'theme.js');
+  var themeConfig = {};
   if (fs.existsSync(config)) {
+    log.debug('config - ' + config);
     themeConfig = require(config);
   }
   if (themeConfig.filters) {
     Object.keys(themeConfig.filters).forEach(function(key) {
       filters[key] = themeConfig.filters[key];
     });
+  }
+
+  // load package information
+  var pkg = {};
+  if (fs.existsSync('package.json')) {
+    log.debug('package - package.json');
+    pkg = require(path.resolve('package.json'));
+  } else if (fs.existsSync('component.json')) {
+    log.debug('package - component.json');
+    pkg = require(path.resolve('component.json'));
   }
 
   swig.init({
@@ -192,7 +205,12 @@ function compileTheme(theme) {
     filters: filters
   });
 
-  return swig.compileFile(template);
+  var tpl = swig.compileFile(template);
+  return function(data) {
+    data.theme = themeConfig;
+    data.pkg = pkg;
+    return tpl.render(data);
+  }
 }
 exports.compileTheme = compileTheme;
 
@@ -219,6 +237,7 @@ function copy(theme, dest) {
 
 
 function write(filepath, content) {
+  log.debug('write - ' + filepath);
   mkdir(path.dirname(filepath));
   fs.writeFileSync(filepath, content);
 }
@@ -241,6 +260,7 @@ exports.recurse = recurse;
 
 function mkdir(dirpath, mode) {
   if (fs.existsSync(dirpath)) return;
+  log.debug('mkdir - ' + dirpath);
 
   mode = mode || (parseInt('0777', 8) & (~process.umask()));
 
