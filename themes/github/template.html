@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Style Guide</title>
+    {%- if pkg %}
+    <title>{% if pkg.title %}{{pkg.title}}{% else %}{{pkg.name}}{% endif %}</title>
+    {%- endif %}
     <link rel="stylesheet" href="{{permalink('style.css')}}" />
     <style type="text/css">
       {{ guide.css }}
@@ -10,6 +12,9 @@
   </head>
   <body>
     <div class="container">
+      {%- if pkg %}
+      <h1 class="title"><a href="{{permalink('index.html')}}">{% if pkg.title %}{{pkg.title}}{% else %}{{pkg.name}}{% endif %}</a></h1>
+      {%- endif %}
       <div class="menu-container">
         <ol class="menu">
           {%- for item in styleguides %}
