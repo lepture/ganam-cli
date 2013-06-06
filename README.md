@@ -238,6 +238,11 @@ And then, you can use the `substring` filter in `template.html`:
 
 ## Changelog
 
+**Jun 6, 2013** `0.3.1`
+
+- Update ganam (~0.2.0)
+- Pure theme support header feature [lepture/ganam#3](https://github.com/lepture/ganam/issues/3)
+
 **Jun 6, 2013** `0.3.0`
 
 - Read data from `theme.js` and `package.json`
