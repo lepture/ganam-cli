@@ -125,6 +125,7 @@ function helpMessage() {
     '    -c, --compress         Compress css output',
     '    --import <file>        Import stylus <file>',
     '    --include-css          Include regular css on @import',
+    '    -w, --watch            Watch file(s) for changes and re-compile',
     '    -q, --quiet            Only show warn logs',
     '    -v, --verbose          Show more logs',
     '    -V, --version          Display the version',
