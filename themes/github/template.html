@@ -17,6 +17,11 @@
       {%- endif %}
       <div class="menu-container">
         <ol class="menu">
+          {%- if readme %}
+          <li class="active"><a href="{{permalink('index.html')}}">Overview</a></li>
+          {%- else %}
+          <li><a href="{{permalink('index.html')}}">Overview</a></li>
+          {%- endif %}
           {%- for item in styleguides %}
           {%- if item.name == guide.name %}
           <li class="active"><a href="{{permalink(item)}}">{{item.name|title}}</a></li>
