@@ -49,6 +49,9 @@
           {{ readme|markdown }}
         </div>
         {%- else %}
+        {%- if guide.header %}
+        <div class="main-header">{{guide.header|markdown}}</div>
+        {%- endif %}
         <div class="main-container styleguide">
           {%- for section in guide.sections %}
           <div class="section">
