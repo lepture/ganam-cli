@@ -77,6 +77,17 @@ pre .string, pre .support.value  {
   color: #3b8bba; /* skinbuilder block-mine-text-low with #1f8dd6 as primary */
 }
 
+.menu-link {
+  position: fixed;
+  top: 0;
+  left: -150px;
+  line-height: 1;
+  padding: 0.75em 1em;
+  background: #000;
+  background: rgba(0, 0, 0, 0.7);
+  transition: all 0.2s ease;
+}
+
 .container {
   padding-left: 150px;
   left: 0;
@@ -85,6 +96,7 @@ pre .string, pre .support.value  {
 .menu {
   position: fixed;
   top: 0;
+  left: 150px;
   bottom: 0;
   z-index: 1000;
   background: #191818;
@@ -93,6 +105,10 @@ pre .string, pre .support.value  {
   width: 150px;
   -webkit-overflow-scroll: touch;
   font-family: "proxima-nova", sans-serif;
+  transition: all 0.2s ease;
+}
+.menu img {
+  border: 0;
 }
 .menu ol {
   list-style: none;
@@ -212,4 +228,25 @@ pre .string, pre .support.value  {
   border-left: 5px solid #ddd;
   padding-left: 1.5em;
   margin: 1em 40px;
+}
+
+@media (max-width: 870px) {
+  .container {
+    padding-left: 0;
+  }
+  .main-container {
+    width: 90%;
+  }
+  .menu, .menu-link {
+    left: 0;
+  }
+  .toggle-expand .container {
+    padding-left: 150px;
+  }
+  .toggle-expand .menu {
+    left: 150px;
+  }
+  .toggle-expand .menu-link {
+    left: 150px;
+  }
 }

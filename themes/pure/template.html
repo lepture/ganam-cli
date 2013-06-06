@@ -12,6 +12,7 @@
   </head>
   <body>
     <div class="container">
+      <a id="menu-toggle" class="menu-link" href="#menu"><img src="{{permalink('navicon2x.png')}}" width="20" alt="Menu toggle" /></a>
       <div class="menu">
         <div class="menu-container">
           {%- if pkg %}
@@ -66,5 +67,18 @@
         {%- endif %}
       </div>
     </div>
+    <script type="text/javascript">
+      (function(d) {
+        var bar = d.getElementById('menu-toggle');
+        bar.onclick = function(e) {
+          e.preventDefault();
+          if (d.body.className == 'toggle-expand') {
+            d.body.className = '';
+          } else {
+            d.body.className = 'toggle-expand';
+          }
+        }
+      })(document);
+    </script>
   </body>
 </html>
