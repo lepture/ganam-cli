@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ganam-cli</title>
+    <link rel="stylesheet" href="style.css" />
+    <style type="text/css">
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title"><a href="index.html">ganam-cli</a></h1>
+      <div class="menu-container">
+        <ol class="menu">
+          <li class="active"><a href="index.html">Overview</a></li>
+          <li><a href="buttons.html">Buttons</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="subdir/typography.html">Subdir/typography</a></li>
+        </ol>
+      </div>
+      <div class="readme">
+        <h1>Ganam Style Guide</h1>
+<blockquote>
+<p>The command line tools for ganam.</p>
+</blockquote>
+<h2>Install</h2>
+<p>Install with npm:</p>
+<pre><code>$ npm install ganam-cli -g</code></pre>
+<p>Remember the <code>-g</code> option.</p>
+<h2>Usage</h2>
+<p>The command line interface:</p>
+<pre><code>$ ganam -h
+
+  Usage: ganam [options] &lt;dir&gt;
+
+  Options:
+
+    -o, --out &lt;dir&gt;        Output to &lt;dir&gt; when passing files
+    -t, --theme &lt;name&gt;     Specify the theme, default is github
+    -u, --use &lt;path&gt;       Utilize the stylus plugin at &lt;path&gt;
+    -I, --include &lt;path&gt;   Add &lt;path&gt; to lookup paths
+    -c, --compress         Compress css output
+    --import &lt;file&gt;        Import stylus &lt;file&gt;
+    --include-css          Include regular css on @import
+    -w, --watch            Watch file(s) for changes and re-compile
+    -q, --quiet            Only show warn logs
+    -v, --verbose          Show more logs
+    -V, --version          Display the version
+    -h, --help             Display this help menu</code></pre>
+<p>The style file structure:</p>
+<pre><code>package.json
+README.md
+guide/
+  buttons.styl
+  forms.styl</code></pre>
+<h2>Style Syntax</h2>
+<p>Find the syntax at: <a href="https://github.com/lepture/ganam#syntax">Ganam Parser</a></p>
+<p>In CSS, it is something like:</p>
+<pre><code class="lang-css">/*
+1.1 Classy Buttons
+
+Classy buttons is clickable form action buttons,
+it is widely usage in forms.
+
+:hover - button when hovered
+:disabled - button when disabled
+.disabled - the same as :disabled
+
+Examples:
+
+    &lt;button class=&quot;classy {{modifier}}&quot;&gt;Button&lt;/button
+    &lt;a class=&quot;button-classy {{modifier}}&quot;&gt;Button&lt;/a&gt;
+*/
+
+button.classy,
+a.button-classy {
+  color: #d64;
+}
+button.classy:hover {
+  color: #000;
+}</code></pre>
+<p>In stylus, you can use <code>//</code> as the comment leading, like:</p>
+<pre><code>// 1.1 Classy Buttons
+//
+// Classy buttons ....</code></pre>
+<p>There are five parts of a section:</p>
+<h3>Title</h3>
+<p>The first line with a version number is the title, which is:</p>
+<pre><code>1.1 Classy Buttons</code></pre>
+<h3>Description</h3>
+<p>The lines below title and above modifiers, which is:</p>
+<pre><code>Classy buttons is clickable form action buttons,
+it is widely usage in forms.</code></pre>
+<h3>Modifiers</h3>
+<p>Modifiers are key value pairs to decorate the element:</p>
+<pre><code>:hover - button when hovered
+:disabled - button when disabled
+.disabled - the same as :disabled</code></pre>
+<p>The key is a class or a pseudo-class before <code>-</code>.</p>
+<p>Modifiers are not required, the section may contain no modifiers.</p>
+<h3>Examples</h3>
+<p>Examples are code to be rendered. If the section has modifiers, the example code will be rendered (modifiers.length) times, and the variable <code>{{modifier}}</code> will be replaced every time.</p>
+<p>Examples can be a path to a file:</p>
+<pre><code>Examples: ./code.html</code></pre>
+<h2>Theme</h2>
+<p>Ganam-cli ships with a default theme. If you are not satisfied with it, you can write your own theme.</p>
+<p>A theme folder is something like:</p>
+<pre><code>template.html     &lt;- required
+theme.js          &lt;- optional
+...               &lt;- any other files will be copied to out directory</code></pre>
+<h3>template.html</h3>
+<p>Template is powered by <a href="http://paularmstrong.github.com/swig/">swig</a>, you should learn some basic knowledge of swig markup.</p>
+<p>Variables that can be used in template:</p>
+<ul>
+<li><strong>styleguides</strong>: always available</li>
+<li><strong>readme</strong>: only available when render readme</li>
+<li><strong>guide</strong>: only available when render this specified guide</li>
+<li><strong>theme</strong>: (<em>optional</em>), variables that you defined in <code>theme.js</code></li>
+<li><strong>pkg</strong>: (<em>optional</em>), variables that you defined in <code>package.json</code></li>
+<li><strong>permalink_url</strong>: a function to generate permalink</li>
+</ul>
+<h4>guide</h4>
+<p>The <code>guide</code> variable is an object, which looks like:</p>
+<pre><code class="lang-js">{
+    &quot;order&quot;: 1,
+    &quot;name&quot;: &quot;foo&quot;,
+    &quot;filename&quot;: &quot;foo.styl&quot;,
+    &quot;filepath&quot;: &quot;./foo.styl&quot;,
+    &quot;css&quot;: &quot;button {.....}&quot;,
+    &quot;sections&quot;: [....]
+}</code></pre>
+<p><code>sections</code> is a list of section object, which looks like:</p>
+<pre><code class="lang-js">{
+    &quot;name&quot;: &quot;1.1&quot;,
+    &quot;title&quot;: &quot;Classy Buttons&quot;
+    &quot;description&quot;: &quot;Classy buttons is clickable form action buttons,\nit is widely usage in forms.&quot;,
+    &quot;modifiers&quot;: [
+        {&quot;name&quot;: &quot;:hover&quot;, &quot;description&quot;: &quot;button when hovered&quot;},
+        {&quot;name&quot;: &quot;:disabled&quot;, &quot;description&quot;: &quot;button when disabled&quot;},
+        {&quot;name&quot;: &quot;.disabled&quot;, &quot;description&quot;: &quot;the same as :disabled&quot;}
+    ],
+    &quot;html&quot;: &quot;&lt;button class=&#39;classy {{modifier}}&#39;&gt;Button&lt;/button\n&lt;a class=&#39;button-classy {{modifier}}&#39;&gt;Button&lt;/a&gt;&quot;,
+    &quot;examples&quot;: [
+        {&quot;name&quot;: &quot;&quot;, &quot;code&quot;: &quot;&lt;button class=&#39;classy &#39;&gt;Button&lt;/button&gt;......&quot;},
+        {&quot;name&quot;: &quot;:hover&quot;, &quot;code&quot;: &quot;&lt;button class=&#39;classy pseudo-class-hover&#39;&gt;Button&lt;/button&gt;......&quot;},
+        {&quot;name&quot;: &quot;:disabled&quot;, &quot;code&quot;: &quot;&lt;button class=&#39;classy pseudo-class-disabled&#39;&gt;Button&lt;/button&gt;......&quot;},
+        ...
+    ]
+}</code></pre>
+<h4>styleguides</h4>
+<p>Styleguides is a list of <code>guide</code> object ordered by <code>order</code>.</p>
+<h4>readme</h4>
+<p>Readme is the content in <code>README.md</code>.</p>
+<p>Ganam will search readme file in the style guide folder first, if not found, it will search readme file in the current working directory.</p>
+<h3>theme.js</h3>
+<p>You can define some information in <code>theme.js</code> which can be used in <code>template.html</code>.</p>
+<p>Take an example, your <code>theme.js</code> is:</p>
+<pre><code class="lang-js">exports.name = &#39;ganam&#39;</code></pre>
+<p>In your <code>template.html</code>, you can use the <code>theme</code> variable:</p>
+<pre><code>&lt;h1&gt;{{theme.name}}&lt;/h1&gt;</code></pre>
+<p>If you want to extend the filters, add in your <code>theme.js</code>:</p>
+<pre><code class="lang-js">exports.filters = {
+    subtring: function(s, start, end) {
+        return s.substring(start, end)
+    }
+}</code></pre>
+<p>And then, you can use the <code>substring</code> filter in <code>template.html</code>:</p>
+<pre><code>{{ &quot;ganam&quot;|subtring(0, 2) }}</code></pre>
+<h2>Changelog</h2>
+<p><strong>Jun 6, 2013</strong> <code>0.3.0</code></p>
+<ul>
+<li>Read data from <code>theme.js</code> and <code>package.json</code></li>
+<li>Improve theme, and improve how to organize theme</li>
+<li>Support render readme as index page. <a href="https://github.com/lepture/ganam-cli/issues/5">#5</a></li>
+<li>Add watch option for command line. <a href="https://github.com/lepture/ganam-cli/issues/4">#4</a></li>
+<li>Add pure theme. <a href="https://github.com/lepture/ganam-cli/issues/2">#2</a></li>
+</ul>
+<p><strong>May 8, 2013</strong> <code>0.2.0</code></p>
+<ul>
+<li>Support recurse walk directory. <a href="https://github.com/lepture/ganam-cli/issues/1">#1</a></li>
+<li>Bugfix, missing option <code>-c, --compress</code>. <a href="https://github.com/lepture/ganam-cli/issues/3">#3</a></li>
+<li>Show ganam version: <code>ganam --version</code>.</li>
+</ul>
+<p><strong>May 8, 2013</strong> <code>0.1.0</code></p>
+<p>First preview release.</p>
+
+      </div>
+    </div>
+  </body>
+</html>

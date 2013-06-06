@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ganam-cli</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style type="text/css">
+      /*
+ * 3.1 Typography
+ *
+ * All about text.
+ *
+ * Examples: ./_text.html
+ *
+ */
+
+.yue {
+  font: 400 16px/1.62 "Helvetica Neue", "Arial", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", "SimSun", sans-serif;
+  color: #4c4c4c;
+}
+
+/* header */
+.yue h1,
+.yue h2,
+.yue h3,
+.yue h4,
+.yue h5,
+.yue h6 {
+  color: #222;
+  margin: 1.62em 0 0.62em;
+}
+.yue h1 {
+  font-size: 1.5em;
+}
+.yue h2 {
+  font-size: 1.25em;
+}
+.yue h3 {
+  font-size: 1.1em;
+}
+.yue h4,
+.yue h5,
+.yue h6 {
+  font-size: 1em;
+}
+.yue h6 {
+  font-weight: 500;
+}
+
+/* elements */
+.yue p {
+  margin: 0.62em 0 1.62em;
+}
+.yue a {
+  color: #111;
+  text-decoration: none;
+  vertical-align: middle;
+  border-bottom: 1px dotted #333;
+  word-wrap: break-word;
+}
+.yue a:hover {
+  color: #555;
+  text-decoration: none;
+}
+.yue a.image {
+  border-bottom: none;
+}
+.yue strong {
+  font-weight: 700;
+  color: #222;
+}
+.yue em {
+  font-style: italic;
+  color: #222;
+}
+.yue img {
+  max-width: 98%;
+  margin: 0.2em 0;
+}
+.yue hr {
+  border: 0 none;
+  margin-bottom: 2em;
+}
+.yue hr:after {
+  color: #9f9f95;
+  font-size: 1.1em;
+  display: block;
+  content: "* * *";
+  text-align: center;
+  letter-spacing: .6em;
+}
+.yue blockquote {
+  margin: 0.62em 0 1.62em;
+  padding-left: 18px;
+  border-left: 4px solid #dadada;
+  color: #8a8a8a;
+}
+
+/* list */
+.yue ul,
+.yue ol {
+  margin-left: 14px;
+  padding-left: 16px;
+}
+.yue ul {
+  list-style-type: square;
+}
+.yue ol {
+  list-style-type: decimal;
+}
+.yue li {
+  margin-bottom: 0.6em;
+}
+.yue li ul,
+.yue li,
+.yue ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 14px;
+}
+.yue li ul {
+  list-style-type: disc;
+}
+.yue li ul ul {
+  list-style-type: circle;
+}
+.yue li p {
+  margin: 0.4em 0 0.6em;
+}
+
+/* code and pre */
+.yue code,
+.yue tt {
+  color: #808080;
+  font-size: 0.96em;
+  background-color: #f9f9f7;
+  padding: 1px 2px;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+  font-family: "Inconsolata", "Menlo", monospace;
+}
+.yue pre {
+  padding: 7px;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  overflow: auto;
+  line-height: 1.5;
+  font-size: 0.96em;
+  font-family: "Inconsolata", "Menlo", monospace;
+  color: #4c4c4c;
+  background-color: #f9f9f7;
+}
+.yue pre code, .yue pre tt {
+  color: #4c4c4c;
+  border: none;
+  background-color: none;
+  padding: auto;
+}
+
+/* table */
+.yue table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1.5em;
+  font-size: 0.96em;
+}
+.yue th,
+.yue td {
+  text-align: left;
+  padding: 4px 8px 4px 10px;
+  border: 1px solid #dadada;
+}
+.yue td {
+  vertical-align: top;
+}
+.yue tr:nth-child(even) {
+  background-color: #efefee;
+}
+/*
+ * 3.1 Typography
+ *
+ * All about text.
+ *
+ * Examples: ./_text.html
+ *
+ */
+
+.yue {
+  font: 400 16px/1.62 "Helvetica Neue", "Arial", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", "SimSun", sans-serif;
+  color: #4c4c4c;
+}
+
+/* header */
+.yue h1,
+.yue h2,
+.yue h3,
+.yue h4,
+.yue h5,
+.yue h6 {
+  color: #222;
+  margin: 1.62em 0 0.62em;
+}
+.yue h1 {
+  font-size: 1.5em;
+}
+.yue h2 {
+  font-size: 1.25em;
+}
+.yue h3 {
+  font-size: 1.1em;
+}
+.yue h4,
+.yue h5,
+.yue h6 {
+  font-size: 1em;
+}
+.yue h6 {
+  font-weight: 500;
+}
+
+/* elements */
+.yue p {
+  margin: 0.62em 0 1.62em;
+}
+.yue a {
+  color: #111;
+  text-decoration: none;
+  vertical-align: middle;
+  border-bottom: 1px dotted #333;
+  word-wrap: break-word;
+}
+.yue a.pseudo-class-hover {
+  color: #555;
+  text-decoration: none;
+}
+.yue a.image {
+  border-bottom: none;
+}
+.yue strong {
+  font-weight: 700;
+  color: #222;
+}
+.yue em {
+  font-style: italic;
+  color: #222;
+}
+.yue img {
+  max-width: 98%;
+  margin: 0.2em 0;
+}
+.yue hr {
+  border: 0 none;
+  margin-bottom: 2em;
+}
+.yue hr:after {
+  color: #9f9f95;
+  font-size: 1.1em;
+  display: block;
+  content: "* * *";
+  text-align: center;
+  letter-spacing: .6em;
+}
+.yue blockquote {
+  margin: 0.62em 0 1.62em;
+  padding-left: 18px;
+  border-left: 4px solid #dadada;
+  color: #8a8a8a;
+}
+
+/* list */
+.yue ul,
+.yue ol {
+  margin-left: 14px;
+  padding-left: 16px;
+}
+.yue ul {
+  list-style-type: square;
+}
+.yue ol {
+  list-style-type: decimal;
+}
+.yue li {
+  margin-bottom: 0.6em;
+}
+.yue li ul,
+.yue li,
+.yue ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 14px;
+}
+.yue li ul {
+  list-style-type: disc;
+}
+.yue li ul ul {
+  list-style-type: circle;
+}
+.yue li p {
+  margin: 0.4em 0 0.6em;
+}
+
+/* code and pre */
+.yue code,
+.yue tt {
+  color: #808080;
+  font-size: 0.96em;
+  background-color: #f9f9f7;
+  padding: 1px 2px;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+  font-family: "Inconsolata", "Menlo", monospace;
+}
+.yue pre {
+  padding: 7px;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  overflow: auto;
+  line-height: 1.5;
+  font-size: 0.96em;
+  font-family: "Inconsolata", "Menlo", monospace;
+  color: #4c4c4c;
+  background-color: #f9f9f7;
+}
+.yue pre code, .yue pre tt {
+  color: #4c4c4c;
+  border: none;
+  background-color: none;
+  padding: auto;
+}
+
+/* table */
+.yue table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1.5em;
+  font-size: 0.96em;
+}
+.yue th,
+.yue td {
+  text-align: left;
+  padding: 4px 8px 4px 10px;
+  border: 1px solid #dadada;
+}
+.yue td {
+  vertical-align: top;
+}
+.yue tr:nth-child(even) {
+  background-color: #efefee;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a id="menu-toggle" class="menu-link" href="#menu"><img src="../navicon2x.png" width="20" alt="Menu toggle" /></a>
+      <div class="menu">
+        <div class="menu-container">
+          <a class="title" href="../index.html">ganam-cli</a>
+          <ol>
+            <li><a href="../buttons.html">Buttons</a></li>
+            <li><a href="../forms.html">Forms</a></li>
+            <li class="active"><a href="typography.html">Typography</a></li>
+          </ol>
+        </div>
+      </div>
+      <div class="main">
+        <div class="main-container styleguide">
+          <div class="section">
+            <h2 class="section-title">
+              <span class="section-name">3.1</span>
+              <span class="section-title">Typography</span>
+            </h2>
+            <div class="section-body">
+              <p>All about text.</p>
+
+              <ul class="modifier">
+              </ul>
+            </div>
+            <div class="example">
+ <div class="yue">
+  <h1>Header 1</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <strong>dolore magna</strong> aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <em>Excepteur sint occaecat</em> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <h2>Header 2</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <a href="#">labore et dolore magna</a> aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <h3>Header 3</h3>
+  <blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</blockquote>
+
+  <h4>Header 4</h4>
+  Lorem ipsum dolor sit amet, <br />
+  consectetur adipisicing elit, <br/>
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br />
+  Ut enim ad minim veniam,<br />
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br />
+
+  <h5>Header 5</h5>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <hr />Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <h6>Header 6</h6>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+
+            </div>
+            <div class="section-html">
+              <pre class="highlight"><code class="xml">./_text.html</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      (function(d) {
+        var bar = d.getElementById('menu-toggle');
+        bar.onclick = function(e) {
+          e.preventDefault();
+          if (d.body.className == 'toggle-expand') {
+            d.body.className = '';
+          } else {
+            d.body.className = 'toggle-expand';
+          }
+        }
+      })(document);
+    </script>
+  </body>
+</html>
