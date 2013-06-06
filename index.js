@@ -211,7 +211,7 @@ function compileTheme(theme) {
         url += '.html';
       }
       if (url == 'index.html') {
-        return '';
+        return './';
       }
       return url.replace(/\/index\.html$/, '/');
     };

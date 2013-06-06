@@ -9,6 +9,19 @@
     <style type="text/css">
       {{ guide.css }}
     </style>
+    {%- if pkg and pkg.googleAnalytics %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{pkg.googleAnalytics}}']);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = '//www.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    {%- endif %}
   </head>
   <body>
     <div class="container">
