@@ -201,12 +201,19 @@ function compileTheme(theme) {
     data.theme = themeConfig;
     data.pkg = pkg;
     data.permalink = function(item) {
+      if (/^https?:\/\//.test(item) || /^\//.test(item)) {
+        // item is absolute url
+        return item;
+      }
       var dir = path.dirname(dest);
       var url = unixifyPath(path.relative(dir, item.name || item));
       if (item.name) {
         url += '.html';
       }
-      return url;
+      if (url == 'index.html') {
+        return '';
+      }
+      return url.replace(/\/index\.html$/, '/');
     };
     write(path.join(out, dest), tpl.render(data));
   }
