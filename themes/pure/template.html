@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    {%- if pkg %}
+    <title>{% if pkg.title %}{{pkg.title}}{% else %}{{pkg.name}}{% endif %}</title>
+    {%- endif %}
+    <link rel="stylesheet" href="{{permalink('style.css')}}" />
+    <style type="text/css">
+      {{ guide.css }}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="menu">
+        <div class="menu-container">
+          {%- if pkg %}
+          <a class="title" href="{{permalink('index.html')}}">{% if pkg.title %}{{pkg.title}}{% else %}{{pkg.name}}{% endif %}</a>
+          {%- endif %}
+          <ol>
+            {%- for item in styleguides %}
+            {%- if item.name == guide.name %}
+            <li class="active"><a href="{{permalink(item)}}">{{item.name|purename|title}}</a></li>
+            {%- else %}
+            <li><a href="{{permalink(item)}}">{{item.name|purename|title}}</a></li>
+            {%- endif %}
+            {%- endfor %}
+          </ol>
+        </div>
+      </div>
+      <div class="main">
+        {%- if readme %}
+        <div class="main-container readme">
+          {{ readme|markdown }}
+        </div>
+        {%- else %}
+        <div class="main-container styleguide">
+          {%- for section in guide.sections %}
+          <div class="section">
+            <h2 class="section-title">
+              <span class="section-name">{{section.name}}</span>
+              <span class="section-title">{{section.title}}</span>
+            </h2>
+            <div class="section-body">
+              {{section.description|markdown}}
+              <ul class="modifier">
+                {%- for modifier in section.modifiers %}
+                <li><strong>{{modifier.name}}</strong> - {{modifier.description}}</li>
+                {%- endfor %}
+              </ul>
+            </div>
+            {%- for example in section.examples %}
+            <div class="example">
+              {%- if example.name %}
+              <span class="example-name">{{example.name}}</span>
+              {%- endif %}
+              {{example.code}}
+            </div>
+            {%- endfor %}
+            <div class="section-html">
+              {{section.html|highlight('html')}}
+            </div>
+          </div>
+          {%- endfor %}
+        </div>
+        {%- endif %}
+      </div>
+    </div>
+  </body>
+</html>

@@ -60,7 +60,7 @@
           </div>
           {%- endfor %}
           <div class="section-html">
-            <pre><code>{{section.html|highlight('html')}}</code></pre>
+            {{section.html|highlight('html')}}
           </div>
         </div>
         {%- endfor %}

@@ -1,0 +1,215 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+body {
+  color: #777;
+  font-size: 100%;
+  line-height: 1.6em;
+  font-family: "proxima-nova", sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: rgb(75, 75, 75);
+}
+a {
+  color: #3b8bba; /* block-background-text-normal */
+  text-decoration: none;
+}
+
+a:visited {
+  color: #265778; /* block-normal-text-normal */
+}
+
+dt {
+  font-weight: bold;
+}
+dd {
+  margin: 0 0 10px 0;
+}
+pre {
+  word-wrap: break-word;
+  padding: 6px 10;
+  line-height: 1.3em;
+  margin-bottom: 20;
+  border: 1px solid #eee;
+}
+code {
+  border: none;
+  margin: 0 2px;
+  font-size: 0.8em;
+  padding: 0.4em 0.6em;
+  white-space: nowrap;
+}
+pre code {
+  padding: 0;
+  margin: 0;
+  font-size: 0.95em;
+  white-space: pre-wrap;
+}
+pre, code {
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
+  color: #333;
+  background: rgb(250, 250, 250);
+}
+pre .comment {
+  color: #999;
+}
+pre .tag, pre .tag-name, pre .support.tag-name {
+  color: rgb(85, 85, 85);
+}
+pre .keyword, pre .css-property, pre .vendor-prefix, pre .sass, pre .class, pre .id, pre .css-value, pre .entity.function, pre .storage.function {
+  font-weight: bold;
+}
+pre .css-property, pre .css-value, pre .vendor-prefix, pre .support.namespace {
+  color: #333;
+}
+pre .constant.numeric, pre .keyword.unit, pre .hex-color {
+  font-weight: normal;
+  color: #099;
+}
+
+pre .attribute, pre .variable, pre .support {
+  color:  #757575; /* skinbuilder block-page-text-normal with #1f8dd6 as primary */
+}
+pre .string, pre .support.value  {
+  font-weight: normal;
+  color: #3b8bba; /* skinbuilder block-mine-text-low with #1f8dd6 as primary */
+}
+
+.container {
+  padding-left: 150px;
+  left: 0;
+  transition: all 0.2s ease;
+}
+.menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: #191818;
+  overflow-y: auto;
+  margin-left: -150px;
+  width: 150px;
+  -webkit-overflow-scroll: touch;
+  font-family: "proxima-nova", sans-serif;
+}
+.menu ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+.menu a {
+  display: block;
+  line-height: 1.5em;
+  color: #999;
+  border: none;
+  padding: 0.6em 0 0.6em 0.6em;
+  text-decoration: none;
+}
+.menu a:hover {
+  background: #333;
+}
+.menu .active a {
+  background: #1f8dd6;
+  color: white;
+}
+.menu a.title {
+  font-size: 1.1em;
+  color: white;
+  border-bottom: 1px solid #333;
+}
+.main {
+  width: 100%;
+}
+.main-container {
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.main-container pre {
+  overflow: auto;
+}
+.section .section-title {
+  margin: 46px 0 20px 0;
+  font-weight: 300;
+  color: #888;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+.section .section-name {
+  font-size: smaller;
+}
+.readme p, .section-body p {
+  line-height: 1.6em;
+  margin: 1em 0;
+}
+.section-body .modifier {
+  list-style-type: circle;
+  margin: 1.5em 0 1.8em;
+}
+.section .example {
+  position: relative;
+  padding: .3em 0;
+}
+.section .example .example-name {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #999;
+  background: #f9f9f9;
+  font-size: 11px;
+  padding: 5px 15px;
+}
+.readme pre, .section-html pre {
+  word-wrap: break-word;
+  line-height: 1.3em;
+  border: 1px solid #eee;
+  margin: 1.3em 0 1em;
+  padding: 1.3em;
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
+  color: #666;
+  background: #fafafa;
+}
+.readme pre {
+  padding: 0.3em 0.6em;
+}
+.readme pre code, .section-html pre code {
+  color: #666;
+}
+.readme h1, .readme h2, .readme h3, .readme h4 {
+  font-family: "Georgia", serif;
+}
+.readme h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.readme > h1 {
+  text-align: center;
+  margin: 50px 0 20px;
+}
+.readme h2 {
+  font-size: 1.5em;
+  margin: 1.83em 0 0.83em;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+.readme h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.readme h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+.readme blockquote {
+  font-family: "Georgia", serif;
+  color: #666;
+  font-style: italic;
+  line-height: 1.8em;
+  border-left: 5px solid #ddd;
+  padding-left: 1.5em;
+  margin: 1em 40px;
+}

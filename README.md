@@ -238,6 +238,15 @@ And then, you can use the `substring` filter in `template.html`:
 
 ## Changelog
 
+**Jun 6, 2013** `0.3.0`
+
+- Read data from `theme.js` and `package.json`
+- Improve theme, and improve how to organize theme
+- Support render readme as index page. [#5](https://github.com/lepture/ganam-cli/issues/5)
+- Add watch option for command line. [#4](https://github.com/lepture/ganam-cli/issues/4)
+- Add pure theme. [#2](https://github.com/lepture/ganam-cli/issues/2)
+
+
 **May 8, 2013** `0.2.0`
 
 - Support recurse walk directory. [#1](https://github.com/lepture/ganam-cli/issues/1)
