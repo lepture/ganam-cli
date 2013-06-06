@@ -144,6 +144,15 @@ pre .string, pre .support.value  {
   margin: 0 auto;
   margin-bottom: 50px;
 }
+.footer {
+  text-align: right;
+  width: 100%;
+  font-size: 13px;
+  border-top: 1px solid #eee;
+}
+.footer-container {
+  padding: 1em 10px;
+}
 .main-container pre {
   overflow: auto;
 }
