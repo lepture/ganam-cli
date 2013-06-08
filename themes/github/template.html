@@ -27,7 +27,7 @@
   <body>
     <div class="container">
       {%- if pkg %}
-      <h1 class="title"><a href="{{permalink('index.html')}}">{% if pkg.title %}{{pkg.title}}{% else %}{{pkg.name}}{% endif %}</a></h1>
+      <h1 class="global-title"><a href="{{permalink('index.html')}}">{% if pkg.title %}{{pkg.title}}{% else %}{{pkg.name}}{% endif %}</a></h1>
       {%- endif %}
       <div class="menu-container">
         <ol class="menu">
