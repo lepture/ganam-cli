@@ -119,7 +119,7 @@ function helpMessage() {
     '  Options:',
     '',
     '    -o, --out <dir>        Output to <dir> when passing files',
-    '    -t, --theme <name>     Specify the theme, default is github',
+    '    -t, --theme <name>     Specify the theme, default is ganam',
     '    -u, --use <path>       Utilize the stylus plugin at <path>',
     '    -I, --include <path>   Add <path> to lookup paths',
     '    -c, --compress         Compress css output',

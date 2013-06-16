@@ -41,7 +41,7 @@ exports = module.exports = function(options) {
   }
 
   var out = options.out || 'out';
-  var theme = options.theme || 'github';
+  var theme = options.theme || 'ganam';
   var tpl = compileTheme(theme);
 
   var guides = [];
