@@ -238,6 +238,11 @@ And then, you can use the `substring` filter in `template.html`:
 
 ## Changelog
 
+**Jul 15, 2013** `0.3.2`
+
+- Export run function
+- Change GitHub theme to ganam theme
+
 **Jun 6, 2013** `0.3.1`
 
 - Update ganam (~0.2.0)
