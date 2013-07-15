@@ -95,8 +95,8 @@ function main(argv) {
   }
 
   options.src = remains[0];
-  var ganam = require('../');
-  ganam(options);
+  var ganam = require('..');
+  ganam.run(options);
 
   if (options.watch) {
     var fs = require('fs');

@@ -21,7 +21,7 @@ var log = {
   }
 };
 
-exports = module.exports = function(options) {
+exports.run = function(options, done) {
   options = options || {};
 
   if (options.verbose) {
@@ -104,6 +104,10 @@ exports = module.exports = function(options) {
   guides.forEach(function(guide) {
     tpl(out, guide.name + '.html', {guide: guide, styleguides: guides});
   });
+
+  if (done) {
+    done();
+  }
 };
 exports.log = log;
 
