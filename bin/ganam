@@ -95,6 +95,11 @@ function main(argv) {
   }
 
   options.src = remains[0];
+
+  if (!options.imports.length) {
+    delete options.imports;
+  }
+
   var ganam = require('..');
   ganam.run(options);
 
